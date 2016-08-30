@@ -1,4 +1,4 @@
-angular.module('app', ['auth0', 'angular-storage', 'angular-jwt', 'ngRoute', 'app.userAccountController', 'app.loginController', 'app.homeController', 'app.services'])
+angular.module('app', ['auth0', 'angular-storage', 'angular-jwt', 'ngRoute', 'userAccount', 'app.loginController', 'home','services'])
 
    .config(function myAppConfig ($routeProvider, authProvider){
     authProvider.init({
@@ -14,12 +14,12 @@ angular.module('app', ['auth0', 'angular-storage', 'angular-jwt', 'ngRoute', 'ap
       requiresLogin: false
     })
     .when( '/home', {
-      controller: 'loginController',
+      controller: 'homeController',
       templateUrl: 'home/home.html',
       requiresLogin: false
     })
     .when( '/userAccount', {
-      controller: 'loginController',
+      controller: 'userAccountController',
       templateUrl: 'userAccount/userAccount.html',
       requiresLogin: true
     })
@@ -35,7 +35,7 @@ angular.module('app', ['auth0', 'angular-storage', 'angular-jwt', 'ngRoute', 'ap
             email = profile.email;
 
       });
-      $location.url('/userAccount');
+      $location.url('/home');
     }]);
 
     //Called when login fails

@@ -1,8 +1,9 @@
 (function() {
   'use strict';
 
-  angular.module('services', ['app'])
-         .factory('mapService', mapService);
+  angular
+    .module('services')
+    .factory('mapService', mapService);
 
   mapService.$inject = ['$scope', '$window'];
 
