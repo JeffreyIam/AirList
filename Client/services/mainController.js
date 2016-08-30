@@ -1,6 +1,6 @@
-angular.module('home', ['app', 'userAccount', 'login'])
+angular.module('main', ['app', 'userAccount', 'login'])
 
-  .controller('mainController', function($scope, $http, $window, Shared){
+  .controller('sharedController', function($scope, $http, $window, Shared){
 
   //this gets the users current location within the app
     $scope.env = $window.location.href.split('#');

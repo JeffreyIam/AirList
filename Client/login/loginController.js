@@ -1,16 +1,6 @@
-angular.module('app.loginController', ['app'])
+angular.module('login', ['app'])
 
  .controller('loginController', ['$scope', 'auth', '$window', function ($scope, auth, $window) {
-
-  // if($window.localStorage) {
-
-  //   setTimeout(function() {
-  //     var result = JSON.parse(window.localStorage.profile)
-  //     $scope.name = result.name;
-  //     $scope.email = result.email;
-  //     $scope.$apply();
-  //   },2000);
-  // }
 
  //sets the users email address in localStorage. Signs them in
     $scope.login = function(){
@@ -31,10 +21,4 @@ angular.module('app.loginController', ['app'])
      $window.open("mailto:" + item.email + "?subject=" + subj + "&body=" + message, "_self");
    };
 
-   // $scope.userAccount = function() {
-   //    var result = $window.localStorage.profile;
-   //    debugger;
-   //    $scope.name = result.name;
-   //    $scope.email = result.email;
-   // }
   }])

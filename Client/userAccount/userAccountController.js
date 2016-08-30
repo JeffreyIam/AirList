@@ -1,12 +1,12 @@
 (function() {
   'use strict';
 
-  angular.module('app.userAccountController', ['app'])
-         .controller('app.userAccountController', userAccountController);
+  angular.module('userAccount', ['app'])
+         .controller('userAccountController', userAccountController);
 
-  userAccountController.$inject = ['$scope'];
+  userAccountController.$inject = ['$scope', '$http', 'Shared'];
 
-  function userAccountController ($scope) {
+  function userAccountController ($scope, $http, Shared) {
       $scope.addCategory = [
         {category: "Books"},
         {category: "Cars"},
@@ -17,17 +17,22 @@
         {category: "Toys+Games"}
       ];
 
+      $scope.remove = remove;
+      $scope.returnItem = returnItem;
+      $scope.addItem = addItem;
+      $scope.goToUserAcc = goToUserAcc;
+
 //this removes an item from the database. Only users can delete their own items. Can be placed in the userAccountController instead
 
 
-    $scope.remove = function(item) {
+    function remove(item) {
       $http.delete('/listings/' + item._id).success(function(res) {
         refreshUserListings();
       });
     };
 
       //reverse of above, it changes status to true, and deletes the 'renter' prop out of the item field. Then it refreshes the userListings. Can be placed in the userAccountController instead.
-    $scope.returnItem = function(item){
+    function returnItem(item){
       item.rentable = true;
       delete item.renter;
       var newItem = item;
@@ -39,7 +44,7 @@
     };
 
     //adds a post to the database, using the person's username grabbed from localStorage. Can be placed in the userAccountController instead
-    $scope.addItem = function(post){
+    function addItem(post){
       post.email = JSON.parse(window.localStorage.profile).email;
       if($scope.position && $scope.position.lng && $scope.position.lat){
         post.longitude = $scope.position.lng;
@@ -52,13 +57,7 @@
       }).then(refreshUserListings);
     };
 
-$scope.yourListings = function() {
-    //in order to sort by a person's listing, we grab their email address out of the localStorage. It was stored there after the person logged in with OAuth. If OAuth is not used, another method of getting their email must be used, or just set the person's email address in localStorage in the same place and let the existing code stay the same.
-      $scope.email = JSON.parse(window.localStorage.profile).email;
-      refreshUserListings();
-    }
-
-     $scope.goToUserAcc = function() {
+     function goToUserAcc() {
       $window.location.href  = $window.location.href + 'userAccount'
     }
 
