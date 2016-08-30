@@ -1,14 +1,14 @@
 (function() {
-
   'use strict';
 
-  angular.module('app')
-         .run(runBlock);
+  angular
+    .module('app')
+    .run(runBlock);
 
   runBlock.$inject = ['$rootScope', 'auth', 'store', 'jwtHelper', '$location'];
 
-  function runBlock ($rootScope, auth, store, jwtHelper, $location) {
-     // Listen to a location change event
+  function runBlock($rootScope, auth, store, jwtHelper, $location) {
+    // Listen to a location change event
     $rootScope.$on('$locationChangeStart', function() {
       // Grab the user's token
       var token = store.get('token');

@@ -2,15 +2,15 @@
   'use strict';
 
   angular
-  .module('services')
-  .factory('Shared',Shared);
+    .module('services')
+    .factory('Shared', Shared);
 
   Shared.$inject = ['$http'];
 
   function Shared($http) {
 
     var service = {
-     refreshed: refreshed
+      refreshed: refreshed
     }
 
     return service;
@@ -21,4 +21,3 @@
   }
 
 })();
-
